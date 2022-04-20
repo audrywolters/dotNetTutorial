@@ -28,6 +28,8 @@ namespace ContosoCrafts
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
+            // this needs to be here so it knows there is a controller lurking about ( Controllers/ProductsController )
+            services.AddControllers();
             services.AddTransient<JsonFileProductService>();
         }
 
@@ -55,12 +57,15 @@ namespace ContosoCrafts
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
-                endpoints.MapGet("/products", (context) =>
-                {
-                    var products = app.ApplicationServices.GetService<JsonFileProductService>().GetProducts();
-                    var json = JsonSerializer.Serialize<IEnumerable<Product>>(products);
-                    return context.Response.WriteAsync(json);
-                });
+                endpoints.MapControllers();
+
+                // not using this anymore - going for a friendly approach - ( Controllers/ProductsController )
+                //endpoints.MapGet("/products", (context) =>
+                //{
+                //    var products = app.ApplicationServices.GetService<JsonFileProductService>().GetProducts();
+                //    var json = JsonSerializer.Serialize<IEnumerable<Product>>(products);
+                //    return context.Response.WriteAsync(json);
+                //});
             });
         }
     }
