@@ -22,10 +22,24 @@ namespace ContosoCrafts.Controllers
 
         public JsonFileProductService ProductService { get; }
 
+        // in browswer: https://localhost:5001/products
         [HttpGet]
         public IEnumerable<Product> Get()
         {
             return ProductService.GetProducts();
+        }
+
+
+        // in browswer: https://localhost:5001/products/rate?
+        //[HttpPatch] "[FromBody]"
+        [Route("Rate")]
+        [HttpGet]
+        public ActionResult Get(
+            [FromQuery] string productId,
+            [FromQuery] int rating)
+        {
+            ProductService.AddRating(productId, rating);
+            return Ok();
         }
     }
 }
