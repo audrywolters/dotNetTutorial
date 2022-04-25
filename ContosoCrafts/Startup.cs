@@ -28,6 +28,8 @@ namespace ContosoCrafts
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
+            // so we can use blazor compoenents
+            services.AddServerSideBlazor();
             // this needs to be here so it knows there is a controller lurking about ( Controllers/ProductsController )
             services.AddControllers();
             services.AddTransient<JsonFileProductService>();
@@ -58,6 +60,7 @@ namespace ContosoCrafts
             {
                 endpoints.MapRazorPages();
                 endpoints.MapControllers();
+                endpoints.MapBlazorHub();
 
                 // not using this anymore - going for a friendly approach - ( Controllers/ProductsController )
                 //endpoints.MapGet("/products", (context) =>

@@ -30,7 +30,7 @@ namespace ContosoCrafts.Controllers
         }
 
 
-        // in browswer: https://localhost:5001/products/rate?
+        // in browswer: https://localhost:5001/products/rate?productId=jenlooper-cactus&rating=5
         //[HttpPatch] "[FromBody]"
         [Route("Rate")]
         [HttpGet]
